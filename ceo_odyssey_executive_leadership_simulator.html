@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEO Odyssey: Scale to Global Leader</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              darkBg: '#0B0F17',
+              cardBg: '#131B2A',
+              cardBorder: '#1F2C40',
+              accentCyan: '#00F2FE',
+              accentGreen: '#10B981',
+              accentRed: '#EF4444',
+              accentOrange: '#F59E0B',
+              muted: '#64748B'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0F17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1F2C40;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+    .glow-gold {
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+    }
+    .grid-bg {
+      background-size: 30px 30px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-brand-darkBg text-slate-100 font-sans antialiased min-h-screen flex flex-col grid-bg selection:bg-brand-gold selection:text-black">
+
+  <!-- Top Terminal Bar -->
+  <header class="border-b border-brand-cardBorder bg-brand-cardBg/80 backdrop-blur sticky top-0 z-40 px-4 py-2.5 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="p-2 bg-brand-gold/10 border border-brand-gold/30 rounded-lg text-brand-gold">
+        <i data-lucide="crown" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-bold tracking-wider text-sm text-slate-200">CEO ODYSSEY</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-brand-gold/20 text-brand-gold border border-brand-gold/30 rounded">EXECUTIVE SIMULATOR</span>
+        </div>
+        <p class="text-xs text-slate-400 flex items-center gap-2">
+          <span>Enterprise: <strong id="company-name-display" class="text-slate-200">Aether Dynamic Tech Corp</strong></span>
+          <span class="text-slate-600">|</span>
+          <span class="font-mono text-brand-gold" id="quarter-display">Y1 Q1 (Q1 Total)</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="flex items-center space-x-3">
+      <button id="sound-toggle-btn" class="p-2 bg-slate-800/80 hover:bg-slate-700 border border-brand-cardBorder rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono">
+        <i data-lucide="volume-2" id="sound-icon" class="w-4 h-4 text-brand-gold"></i>
+        <span id="sound-text">AUDIO ON</span>
+      </button>
+      <button id="restart-btn" class="p-2 bg-slate-800/80 hover:bg-red-900/30 border border-brand-cardBorder hover:border-red-500/50 rounded-lg text-slate-300 hover:text-red-400 transition flex items-center gap-1.5 text-xs font-mono">
+        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+        <span>RESET SIM</span>
+      </button>
+      <div class="hidden sm:flex items-center px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-mono">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
+        <span>MARKET OPEN</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- KPI Metrics Banner -->
+    <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+      <!-- Market Cap -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-brand-gold/40 transition glow-gold">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          Market Cap <i data-lucide="trending-up" class="w-3.5 h-3.5 text-brand-gold"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-marketcap">$2.00B</div>
+          <span class="text-[11px] font-mono text-emerald-400 flex items-center gap-0.5" id="kpi-marketcap-delta">
+            <i data-lucide="arrow-up-right" class="w-3 h-3"></i> Initial
+          </span>
+        </div>
+      </div>
+
+      <!-- Annualized Revenue -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-slate-600 transition">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          Ann. Revenue <i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-brand-accentCyan"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-revenue">$500.0M</div>
+          <span class="text-[11px] font-mono text-slate-400" id="kpi-revenue-delta">$125.0M / Qtr</span>
+        </div>
+      </div>
+
+      <!-- Net Profit Margin -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-slate-600 transition">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          Net Margin <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-margin">15.0%</div>
+          <span class="text-[11px] font-mono text-emerald-400" id="kpi-margin-status">Healthy</span>
+        </div>
+      </div>
+
+      <!-- Cash Reserves -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-slate-600 transition">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          Cash Reserves <i data-lucide="wallet" class="w-3.5 h-3.5 text-emerald-400"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-cash">$150.0M</div>
+          <span class="text-[11px] font-mono text-slate-400" id="kpi-cashflow">+ $18.7M OCF</span>
+        </div>
+      </div>
+
+      <!-- Market Share -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-slate-600 transition">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          Market Share <i data-lucide="globe" class="w-3.5 h-3.5 text-brand-accentCyan"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-marketshare">8.5%</div>
+          <span class="text-[11px] font-mono text-slate-400" id="kpi-marketshare-status">Mid-Cap Tier</span>
+        </div>
+      </div>
+
+      <!-- Board Approval -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-slate-600 transition">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          Board Rating <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-400"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-board">75%</div>
+          <span class="text-[11px] font-mono text-amber-400" id="kpi-board-status">Strong Trust</span>
+        </div>
+      </div>
+
+      <!-- Culture & Talent -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-slate-600 transition">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          Culture Score <i data-lucide="users" class="w-3.5 h-3.5 text-purple-400"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-culture">70/100</div>
+          <span class="text-[11px] font-mono text-slate-400" id="kpi-culture-status">Moderate</span>
+        </div>
+      </div>
+
+      <!-- Innovation Index -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder p-3 rounded-xl flex flex-col justify-between hover:border-slate-600 transition">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider flex items-center justify-between">
+          R&D Moat <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+        </span>
+        <div class="mt-2">
+          <div class="text-lg font-bold font-mono text-white" id="kpi-rd">65/100</div>
+          <span class="text-[11px] font-mono text-slate-400" id="kpi-rd-status">Emerging</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Valuation Monitor & Financial Reports Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Interactive Stock Chart Canvas -->
+      <div class="lg:col-span-2 bg-brand-cardBg border border-brand-cardBorder rounded-xl p-5 flex flex-col justify-between">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <i data-lucide="activity" class="w-4 h-4 text-brand-gold"></i>
+              Enterprise Valuation & Revenue Trajectory
+            </h2>
+            <p class="text-xs text-slate-400">Historical quarterly stock price performance ($/Share) & Total Market Cap</p>
+          </div>
+          <div class="flex items-center space-x-4 font-mono text-xs">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-brand-gold"></span> Valuation ($B)</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-brand-accentCyan"></span> Revenue ($M)</span>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="relative w-full h-52 bg-slate-950/60 rounded-lg border border-slate-800 p-2 overflow-hidden">
+          <canvas id="valuationChart" class="w-full h-full block"></canvas>
+        </div>
+
+        <!-- Target Metrics Progress Bar -->
+        <div class="mt-4 pt-3 border-t border-brand-cardBorder/60">
+          <div class="flex items-center justify-between text-xs mb-1.5">
+            <span class="text-slate-400 flex items-center gap-1">
+              <i data-lucide="target" class="w-3.5 h-3.5 text-brand-gold"></i>
+              Scale Progress to Mega-Cap Target ($25B Market Cap / $5B Rev)
+            </span>
+            <span class="font-mono text-brand-gold font-bold" id="target-progress-pct">8.0% Completed</span>
+          </div>
+          <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div id="target-progress-bar" class="h-full bg-gradient-to-r from-brand-gold to-brand-accentCyan transition-all duration-500" style="width: 8%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Statements Summary Panel -->
+      <div class="bg-brand-cardBg border border-brand-cardBorder rounded-xl p-5 flex flex-col">
+        <div class="flex items-center justify-between mb-3 border-b border-brand-cardBorder pb-2">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+            <i data-lucide="file-text" class="w-4 h-4 text-brand-accentCyan"></i>
+            Financial Statements
+          </h2>
+          <!-- Tab selector -->
+          <div class="flex space-x-1 bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-[11px] font-mono">
+            <button id="tab-income" onclick="switchFinancialTab('income')" class="px-2 py-1 rounded bg-brand-cardBorder text-white font-semibold">Income</button>
+            <button id="tab-balance" onclick="switchFinancialTab('balance')" class="px-2 py-1 rounded text-slate-400 hover:text-white">Balance</button>
+            <button id="tab-cash" onclick="switchFinancialTab('cash')" class="px-2 py-1 rounded text-slate-400 hover:text-white">Cash Flow</button>
+          </div>
+        </div>
+
+        <!-- Statement Content Containers -->
+        <div id="statement-content" class="flex-1 font-mono text-xs space-y-2.5 py-1">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+        <button onclick="toggleLearningDrawer()" class="mt-3 w-full py-2 bg-slate-800/80 hover:bg-slate-700/80 border border-brand-cardBorder text-slate-300 hover:text-brand-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition">
+          <i data-lucide="book-open" class="w-4 h-4 text-brand-gold"></i>
+          Executive Finance & Strategy Playbook
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Executive Decision & Advisory Hub -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Strategic Decision Arena (2 Columns) -->
+      <div class="lg:col-span-2 space-y-4">
+        
+        <!-- Decision Header Card -->
+        <div class="bg-gradient-to-r from-brand-cardBg to-slate-900 border border-brand-cardBorder rounded-xl p-5 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+            <i data-lucide="compass" class="w-32 h-32 text-brand-gold"></i>
+          </div>
+
+          <div class="flex items-center space-x-2 text-xs font-mono text-brand-gold mb-1">
+            <span class="px-2 py-0.5 bg-brand-gold/10 border border-brand-gold/30 rounded uppercase font-semibold" id="scenario-category">STRATEGIC CAPITAL ALLOCATION</span>
+            <span>• Quarter Decision Engine</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white tracking-tight" id="scenario-title">Evaluating Strategic Expansion Path</h3>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed" id="scenario-description">
+            Your mid-cap enterprise has established a stable product footprint with $500M in annual revenue. To break into the next growth tier, the board expects you to deploy unallocated capital. How do you allocate capital this quarter?
+          </p>
+
+          <!-- Current Objectives / Key Focus -->
+          <div class="mt-4 pt-3 border-t border-slate-800 flex flex-wrap gap-4 text-xs text-slate-400">
+            <span class="flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i> Primary Objective: Accelerate Revenue Growth</span>
+            <span class="flex items-center gap-1"><i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400"></i> Constraint: Maintain Net Profit > 12%</span>
+          </div>
+        </div>
+
+        <!-- Decision Options Container -->
+        <div class="space-y-3" id="options-container">
+          <!-- Dynamic Decision Option Cards Populated Here -->
+        </div>
+
+      </div>
+
+      <!-- C-Suite Advisory Panel & Recent Impact Feed -->
+      <div class="space-y-6">
+
+        <!-- C-Suite Advisory Board -->
+        <div class="bg-brand-cardBg border border-brand-cardBorder rounded-xl p-5">
+          <div class="flex items-center justify-between mb-3 border-b border-brand-cardBorder pb-2">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <i data-lucide="users" class="w-4 h-4 text-purple-400"></i>
+              C-Suite Advisory Recommendations
+            </h3>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-purple-950/60 text-purple-300 border border-purple-800/50 rounded">4 ADVISORS</span>
+          </div>
+
+          <div class="space-y-3 text-xs" id="advisory-panel">
+            <!-- CFO Advisor -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-slate-200 flex items-center gap-1.5">
+                  <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-400"></i> CFO (Financial Officer)
+                </span>
+                <span class="text-[10px] font-mono text-emerald-400">Focus: Margin & Cash</span>
+              </div>
+              <p class="text-slate-400 italic text-[11px]" id="advisor-cfo-advice">
+                "We must protect free cash flow reserves before making aggressive acquisitions. Ensure return on invested capital stays positive."
+              </p>
+            </div>
+
+            <!-- COO Advisor -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-slate-200 flex items-center gap-1.5">
+                  <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-400"></i> COO (Operations)
+                </span>
+                <span class="text-[10px] font-mono text-blue-400">Focus: Efficiency & Scale</span>
+              </div>
+              <p class="text-slate-400 italic text-[11px]" id="advisor-coo-advice">
+                "Supply chain automation will reduce long-term unit costs and increase operating margin leverage."
+              </p>
+            </div>
+
+            <!-- CTO Advisor -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-slate-200 flex items-center gap-1.5">
+                  <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i> CTO (Technology)
+                </span>
+                <span class="text-[10px] font-mono text-cyan-400">Focus: Innovation Moat</span>
+              </div>
+              <p class="text-slate-400 italic text-[11px]" id="advisor-cto-advice">
+                "If we under-invest in proprietary R&D, competitors will erode our market share within 4 quarters."
+              </p>
+            </div>
+
+            <!-- CMO Advisor -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-lg p-3">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-slate-200 flex items-center gap-1.5">
+                  <i data-lucide="megaphone" class="w-3.5 h-3.5 text-amber-400"></i> CMO (Growth & Brand)
+                </span>
+                <span class="text-[10px] font-mono text-amber-400">Focus: Market Penetration</span>
+              </div>
+              <p class="text-slate-400 italic text-[11px]" id="advisor-cmo-advice">
+                "Customer acquisition costs are rising. Shifting to subscription services will lock in enterprise customers."
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Decision Consequence Feedback Feed -->
+        <div class="bg-brand-cardBg border border-brand-cardBorder rounded-xl p-5">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2 mb-3 border-b border-brand-cardBorder pb-2">
+            <i data-lucide="history" class="w-4 h-4 text-brand-gold"></i>
+            Quarterly Performance Debrief
+          </h3>
+          <div id="decision-feedback-feed" class="text-xs text-slate-300 space-y-2">
+            <div class="p-3 bg-slate-900/60 rounded-lg border border-slate-800 text-slate-400 italic text-center">
+              Welcome to the Executive Suite, Chief. Make your first quarterly strategic decision to view real-time market reactions and impact logs.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Executive Learning Hub Drawer / Modal (Hidden by Default) -->
+  <div id="learning-drawer" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex justify-end transition-opacity">
+    <div class="w-full max-w-2xl bg-brand-cardBg border-l border-brand-cardBorder h-full flex flex-col p-6 overflow-y-auto shadow-2xl">
+      <div class="flex items-center justify-between border-b border-brand-cardBorder pb-4">
+        <div class="flex items-center space-x-2">
+          <div class="p-2 bg-brand-gold/10 border border-brand-gold/30 rounded-lg text-brand-gold">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold text-white uppercase tracking-wider">Executive Strategy & Finance Playbook</h2>
+            <p class="text-xs text-slate-400">Core principles for scaling an enterprise to global market leadership</p>
+          </div>
+        </div>
+        <button onclick="toggleLearningDrawer()" class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="mt-6 space-y-6 text-sm text-slate-300 leading-relaxed">
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+          <h3 class="font-bold text-brand-gold flex items-center gap-2 mb-2">
+            <i data-lucide="trending-up" class="w-4 h-4"></i>
+            1. The Hardware-to-Software / Platform Ecosystem Flywheel
+          </h3>
+          <p class="text-xs text-slate-400">
+            High-growth enterprise titans scale by anchoring customers with high-quality core hardware or products, and subsequently layering high-margin recurring services (SaaS, maintenance, cloud apps) on top. This expands Average Revenue Per User (ARPU) while dramatically raising customer switching costs.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+          <h3 class="font-bold text-brand-accentCyan flex items-center gap-2 mb-2">
+            <i data-lucide="pie-chart" class="w-4 h-4"></i>
+            2. Capital Allocation & Return on Invested Capital (ROIC)
+          </h3>
+          <p class="text-xs text-slate-400">
+            A CEO's primary job is capital deployment. Decisions must balance four main levers: Organic R&D, Strategic M&A, Share Buybacks/Dividends, and Debt Deleveraging. The key metric is ROIC—ensuring every dollar spent yields more than the Cost of Capital (WACC).
+          </p>
+        </div>
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+          <h3 class="font-bold text-emerald-400 flex items-center gap-2 mb-2">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            3. Supply Chain Resilience vs. Gross Margins
+          </h3>
+          <p class="text-xs text-slate-400">
+            Over-concentrating manufacturing or suppliers in a single geographic region maximizes short-term gross profit margins, but creates severe single-point-of-failure risks during geopolitical conflicts, pandemics, or trade tariffs. Diversification shields long-term enterprise value.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+          <h3 class="font-bold text-amber-400 flex items-center gap-2 mb-2">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            4. Board Governance & Stakeholder Alignment
+          </h3>
+          <p class="text-xs text-slate-400">
+            The CEO answers directly to the Board of Directors representing shareholders. Falling below 30% Board Approval leads to immediate executive dismissal. Balancing aggressive growth with operational fiscal discipline maintains long-term board trust.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="mt-auto pt-6 border-t border-brand-cardBorder">
+        <button onclick="toggleLearningDrawer()" class="w-full py-2.5 bg-brand-gold text-black font-bold rounded-lg hover:bg-yellow-400 transition text-xs font-mono">
+          RETURN TO EXECUTIVE SUITE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over / Victory Modal -->
+  <div id="game-over-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="max-w-xl w-full bg-brand-cardBg border-2 border-brand-gold/50 rounded-2xl p-6 sm:p-8 shadow-2xl text-center space-y-6">
+      
+      <div id="modal-icon-container" class="w-16 h-16 mx-auto rounded-full bg-brand-gold/10 border border-brand-gold flex items-center justify-center text-brand-gold">
+        <i data-lucide="trophy" class="w-8 h-8"></i>
+      </div>
+
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-brand-gold font-bold" id="modal-subtitle">SIMULATION COMPLETE</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1" id="modal-title">Legendary Growth Operator</h2>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2" id="modal-description">
+          You successfully scaled Aether Dynamic Tech Corp from a $500M mid-cap into a multi-billion dollar mega-cap market leader while sustaining healthy profit margins!
+        </p>
+      </div>
+
+      <!-- Final Key Financial Summary Matrix -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-900/80 p-4 rounded-xl border border-slate-800 font-mono text-left">
+        <div>
+          <span class="text-[10px] text-slate-400 block">FINAL MARKET CAP</span>
+          <span class="text-sm font-bold text-brand-gold" id="final-cap">$0.00B</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-400 block">ANN. REVENUE</span>
+          <span class="text-sm font-bold text-brand-accentCyan" id="final-rev">$0.00M</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-400 block">NET MARGIN</span>
+          <span class="text-sm font-bold text-emerald-400" id="final-margin">0.0%</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-400 block">BOARD RATING</span>
+          <span class="text-sm font-bold text-amber-400" id="final-board">0%</span>
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <button onclick="restartSimulation()" class="w-full py-3 bg-brand-gold text-slate-950 font-bold rounded-xl hover:bg-yellow-400 transition font-mono tracking-wider text-sm shadow-lg glow-gold">
+          PLAY AGAIN & TEST NEW STRATEGIES
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Status Bar -->
+  <footer class="border-t border-brand-cardBorder bg-brand-cardBg/60 py-3 px-6 text-xs text-slate-500 flex flex-wrap items-center justify-between font-mono gap-2">
+    <div>CEO Odyssey • Executive Leadership & Business Strategy Platform</div>
+    <div class="flex items-center space-x-4">
+      <span>Status: <strong class="text-emerald-400">ONLINE</strong></span>
+      <span>Engine: <strong class="text-slate-300">v3.1-Enterprise</strong></span>
+    </div>
+  </footer>
+
+  <script>
+    /* ===================================================================
+       GLOBAL SIMULATION STATE & DATA CONFIGURATION
+       =================================================================== */
+
+    // Web Audio Sound System
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function playAudioTone(freq, type = 'sine', duration = 0.1) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // Main Executive State Object
+    const initialState = {
+      quarter: 1, // Runs from Q1 (1) to Q16 (16 = Year 4 End)
+      companyName: "Aether Dynamic Tech Corp",
+      
+      // Primary Financial KPIs
+      marketCap: 2000,      // in Millions ($2.0B)
+      annualRevenue: 500,   // in Millions ($500M)
+      netMarginPct: 15.0,    // Net Profit Margin %
+      cashReserves: 150,    // Cash in Millions ($150M)
+      marketSharePct: 8.5,   // Market Share %
+      
+      // Stakeholder & Operational Scores
+      boardApprovalPct: 75, // Board Rating (30% = Dismissal)
+      cultureScore: 70,     // Talent & Culture Index (0-100)
+      rdMoatIndex: 65,      // R&D & Innovation Moat Index (0-100)
+
+      // Historical Tracking Array for Stock Chart
+      history: [
+        { quarter: "Y1 Q1", marketCap: 2000, revenue: 500, sharePrice: 20.00 }
+      ],
+
+      // Selected Financial Statement Tab
+      activeFinancialTab: 'income'
+    };
+
+    let state = JSON.parse(JSON.stringify(initialState));
+
+    /* ===================================================================
+       QUARTERLY DECISION SCENARIOS DATA (Q1 - Q16)
+       =================================================================== */
+    const decisionScenarios = [
+      {
+        quarter: 1,
+        category: "CAPITAL ALLOCATION",
+        title: "Deploying Initial Growth Reserves",
+        description: "Aether Tech holds $150M in initial cash reserves. The board demands a clear 3-year capital strategy to expand market share beyond our 8.5% mid-cap baseline.",
+        options: [
+          {
+            label: "Option A: Aggressive R&D & Product Expansion",
+            detail: "Invest $50M into next-generation proprietary cloud architecture.",
+            cfoAdvice: "Will lower short-term cash reserves by $50M, but preserves our zero-debt status.",
+            cooAdvice: "Builds long-term technical advantages over incumbents.",
+            ctoAdvice: "Essential! Boosts our R&D Moat index significantly.",
+            cmoAdvice: "Gives us strong product messaging for enterprise buyers.",
+            impact: { cash: -50, revenuePct: 12, rdMoat: 15, marginPct: -1.0, boardPct: 5, culture: 5 },
+            debrief: "R&D investment expanded our core technological differentiation. Revenue increased as early adopters signed long-term contracts."
+          },
+          {
+            label: "Option B: Bolt-on Acquisition of Regional Competitor",
+            detail: "Acquire 'Apex Systems' for $80M in cash + equity to absorb their user base.",
+            cfoAdvice: "Consumes half our cash, but immediately adds $60M to annual revenue.",
+            cooAdvice: "Integration risks are moderate; legacy systems will need unifying.",
+            ctoAdvice: "Apex's tech stack is dated, requiring future refactoring.",
+            cmoAdvice: "Immediately expands market share by 2.5% in key sectors.",
+            impact: { cash: -80, revenuePct: 22, marketSharePct: 2.5, marginPct: -2.5, boardPct: 8, culture: -5 },
+            debrief: "The Apex acquisition boosted top-line revenue immediately, though integration overhead briefly squeezed net margins."
+          },
+          {
+            label: "Option C: Conservatively Accumulate Cash & Pay Dividend",
+            detail: "Preserve liquidity and issue a small dividend to bolster investor confidence.",
+            cfoAdvice: "Protects balance sheet liquidity during potential macro headwinds.",
+            cooAdvice: "Leaves operational capacity unchanged.",
+            ctoAdvice: "Competitors will out-innovate us if we sit on capital.",
+            cmoAdvice: "Offers no new growth story for market share expansion.",
+            impact: { cash: -20, revenuePct: 3, marginPct: 1.0, boardPct: -4, rdMoat: -5, culture: 0 },
+            debrief: "Cash preservation satisfied income investors, but growth lagged market peers."
+          }
+        ]
+      },
+      {
+        quarter: 2,
+        category: "PRODUCT STRATEGY & PRICING",
+        title: "Transitioning to High-Margin Recurring SaaS Model",
+        description: "Currently, revenue is driven by one-off perpetual software licenses. Transitioning to a recurring subscription model (SaaS/Cloud) will increase customer lifetime value (LTV).",
+        options: [
+          {
+            label: "Option A: Mandatory Full SaaS Transition (Cut Perpetual Licenses)",
+            detail: "Force all clients onto monthly/annual subscription contracts immediately.",
+            cfoAdvice: "Will cause a temporary dip in cash flow this quarter, followed by high-margin ARR.",
+            cooAdvice: "Simplifies software version support across our entire customer base.",
+            ctoAdvice: "Allows continuous cloud delivery and faster feature deployments.",
+            cmoAdvice: "Some traditional enterprise clients may resist and churn.",
+            impact: { revenuePct: 15, marginPct: 4.5, marketSharePct: -0.5, cash: 10, boardPct: 6, culture: 3 },
+            debrief: "Short-term client friction was outweighed by a structural surge in recurring margins and high-predictability revenue."
+          },
+          {
+            label: "Option B: Hybrid Model (Offer Both Subscription & Perpetual)",
+            detail: "Allow clients to choose their preferred licensing model.",
+            cfoAdvice: "Minimizes revenue volatility and keeps conservative buyers.",
+            cooAdvice: "Forces operations to maintain dual infrastructure pipelines.",
+            ctoAdvice: "Increases engineering overhead and delays feature convergence.",
+            cmoAdvice: "Safe option, keeps customer retention high.",
+            impact: { revenuePct: 8, marginPct: 1.0, marketSharePct: 1.0, cash: 20, boardPct: 2, culture: 0 },
+            debrief: "The hybrid model kept churn low, but maintaining legacy systems capped margin expansion potential."
+          },
+          {
+            label: "Option C: Slash Perpetual License Prices to Drive Volume",
+            detail: "Undercut main competitors by 30% to capture immediate market share.",
+            cfoAdvice: "Hurts gross profit margins significantly per unit.",
+            cooAdvice: "Surges server support load without recurring maintenance fees.",
+            ctoAdvice: "Does not build long-term platform lock-in.",
+            cmoAdvice: "Drives rapid market share expansion among budget-conscious buyers.",
+            impact: { revenuePct: 10, marginPct: -4.0, marketSharePct: 3.0, cash: 15, boardPct: -5, culture: -2 },
+            debrief: "Volume increased dramatically, but low prices diluted brand positioning and compressed net profit margins."
+          }
+        ]
+      },
+      {
+        quarter: 3,
+        category: "SUPPLY CHAIN & OPERATIONS",
+        title: "Global Supply Chain & Cloud Infrastructure Bottlenecks",
+        description: "Surging customer demand is straining our primary data center infrastructure and hardware suppliers, risking SLA breaches and service downtime.",
+        options: [
+          {
+            label: "Option A: Build In-House Tier-4 Data Centers (Vertical Integration)",
+            detail: "Commit $100M capital expenditure to build proprietary server infrastructure.",
+            cfoAdvice: "Requires heavy cash outlay, but lowers operating expenditures for the next decade.",
+            cooAdvice: "Eliminates third-party vendor lock-in and boosts service reliability.",
+            ctoAdvice: "Gives us total control over hardware acceleration and security.",
+            cmoAdvice: "Enhances enterprise trust for banking and sovereign clients.",
+            impact: { cash: -100, marginPct: 3.5, rdMoat: 10, revenuePct: 10, boardPct: 5, culture: 4 },
+            debrief: "Vertical integration initially drained cash reserves, but expanded long-term gross margins and infrastructure control."
+          },
+          {
+            label: "Option B: Multi-Cloud Outsource Strategy (AWS / Azure Partnership)",
+            detail: "Sign multi-year hosting agreements with public cloud providers.",
+            cfoAdvice: "Zero upfront CapEx outlay; preserves liquid cash.",
+            cooAdvice: "Fastest implementation time; scalable immediately.",
+            ctoAdvice: "Subject to external cloud price hikes and margin compression.",
+            cmoAdvice: "Enables immediate international geographic expansion.",
+            impact: { cash: 10, marginPct: -2.0, revenuePct: 14, marketSharePct: 1.5, boardPct: 2, culture: 0 },
+            debrief: "Outsourcing allowed rapid global expansion, but ongoing cloud hosting fees shaved points off net profit margin."
+          },
+          {
+            label: "Option C: Delay Infrastructure Expansion & Cap User Onboarding",
+            detail: "Throttle new enterprise onboarding until cash flow covers expansion.",
+            cfoAdvice: "Protects cash reserves and eliminates debt requirement.",
+            cooAdvice: "Prevents system outages and keeps current SLAs pristine.",
+            ctoAdvice: "Frustrates engineering teams eager to scale systems.",
+            cmoAdvice: "Disastrous for market share momentum; competitors will steal clients.",
+            impact: { cash: 30, revenuePct: -5, marketSharePct: -2.0, marginPct: 1.0, boardPct: -10, culture: -8 },
+            debrief: "Throttling growth protected margins temporarily, but angered the board as market share slipped to agile competitors."
+          }
+        ]
+      },
+      {
+        quarter: 4,
+        category: "RISK & CRISIS MANAGEMENT",
+        title: "Zero-Day Vulnerability & Data Privacy Breach",
+        description: "Security researchers discover a zero-day exploit in our enterprise software platform that exposed customer telemetry data. Emergency action is required.",
+        options: [
+          {
+            label: "Option A: Full Public Disclosure, Apology & Free Security Upgrades",
+            detail: "Proactively notify all enterprise clients, hire external audit firm, offer free security add-ons.",
+            cfoAdvice: "Costs $30M in remediation and legal reserves.",
+            cooAdvice: "Requires freezing product feature updates for 30 days.",
+            ctoAdvice: "The right move. Allows thorough patch verification and architecture hardening.",
+            cmoAdvice: "Temporary PR pain, but builds long-term reputation for integrity.",
+            impact: { cash: -30, marginPct: -1.5, boardPct: -2, culture: 8, rdMoat: 8, marketSharePct: 0.5 },
+            debrief: "Transparent crisis leadership minimized long-term customer churn and established Aether as a trusted enterprise benchmark."
+          },
+          {
+            label: "Option B: Quiet Patch & Private Enterprise Notifications",
+            detail: "Deploy a stealth patch without issuing a public press release.",
+            cfoAdvice: "Saves millions in legal disclosure costs and PR retainers.",
+            cooAdvice: "Keeps operational workflows moving without disruption.",
+            ctoAdvice: "Risky. If leaked, damages developer trust severely.",
+            cmoAdvice: "Protects short-term brand reputation, unless journalists investigate.",
+            impact: { cash: -5, marginPct: 0, boardPct: 2, culture: -5, marketSharePct: -1.0 },
+            debrief: "The quiet patch saved money initially, but rumors compromised trust among cybersecurity-conscious buyers."
+          },
+          {
+            label: "Option C: Deflect Accountability to Third-Party Component Vendor",
+            detail: "Blame an open-source software library supplier in public statements.",
+            cfoAdvice: "Avoids direct corporate liability claims.",
+            cooAdvice: "Strains partner developer ecosystem relationships.",
+            ctoAdvice: "Erodes internal engineering morale and accountability.",
+            cmoAdvice: "Perceived as weak leadership by tech media outlets.",
+            impact: { cash: -10, boardPct: -12, culture: -15, marketSharePct: -2.5, rdMoat: -5 },
+            debrief: "Deflecting blame backfired. Developer morale plummeted and the Board issued a stern formal warning regarding crisis management."
+          }
+        ]
+      },
+      {
+        quarter: 5,
+        category: "ORGANIZATIONAL & C-SUITE LEADERSHIP",
+        title: "Restructuring Enterprise Sales & Executive Compensation",
+        description: "To support our scale past $800M in revenue, the company must align C-suite incentives and restructure regional sales teams into global vertical accounts.",
+        options: [
+          {
+            label: "Option A: Implement Performance Equity Grants & High Sales Commissions",
+            detail: "Tie executive pay to Net Profit & ROIC metrics; offer high commission tiers for enterprise multi-year deals.",
+            cfoAdvice: "Increases stock-based compensation expense, but aligns leadership with market cap growth.",
+            cooAdvice: "Galvanizes global sales force to target Fortune 500 accounts.",
+            ctoAdvice: "Keeps elite engineering talent from defecting to big-tech rivals.",
+            cmoAdvice: "Drives intense market expansion.",
+            impact: { revenuePct: 18, marketSharePct: 2.0, culture: 10, marginPct: -1.0, boardPct: 6 },
+            debrief: "High-performance compensation transformed the sales culture, securing several massive enterprise accounts."
+          },
+          {
+            label: "Option B: Lean Executive Overhaul & Cost Reduction",
+            detail: "Cap executive bonuses and trim middle management layers by 10%.",
+            cfoAdvice: "Immediately boosts net profit margin by reducing fixed SG&A costs.",
+            cooAdvice: "Streamlines decision hierarchy and eliminates bureaucratic redundancy.",
+            ctoAdvice: "Risk losing experienced senior managers.",
+            cmoAdvice: "May signal internal distress to prospective enterprise buyers.",
+            impact: { cash: 20, marginPct: 3.5, culture: -12, revenuePct: 4, boardPct: 4 },
+            debrief: "Operating margins expanded due to reduced payroll, but organizational morale dipped across middle management."
+          },
+          {
+            label: "Option C: Maintain Existing Structure & Hire External Consultants",
+            detail: "Engage a top-tier management consultancy for $15M to advise on corporate structure.",
+            cfoAdvice: "Direct cash drain for advice rather than direct execution.",
+            cooAdvice: "Delays necessary structural changes by 6 to 9 months.",
+            ctoAdvice: "Distracts key engineering leads with endless operational audits.",
+            cmoAdvice: "Provides board-reassuring external validation.",
+            impact: { cash: -15, revenuePct: 2, marginPct: -1.0, boardPct: 2, culture: -4 },
+            debrief: "Consultants produced a lengthy report, but execution stalled while expenses grew."
+          }
+        ]
+      },
+      {
+        quarter: 6,
+        category: "CAPITAL ALLOCATION & M&A",
+        title: "Strategic Mega-Merger Opportunity: Nexus AI Labs",
+        description: "Nexus AI holds groundbreaking automated machine learning patents. Acquiring them for $250M (Cash + Debt) could make Aether the dominant AI ecosystem leader.",
+        options: [
+          {
+            label: "Option A: Complete Acquisition of Nexus AI ($250M Deal)",
+            detail: "Fund via $100M cash reserves and $150M low-interest corporate debt issue.",
+            cfoAdvice: "Increases leverage and annual interest expense, but gives us proprietary AI tech.",
+            cooAdvice: "Requires rapid integration of 200 elite AI researchers.",
+            ctoAdvice: "Transformational! Leapfrogs our technological moat by 3 years.",
+            cmoAdvice: "Positioning Aether as the market AI leader will command premium stock multiples.",
+            impact: { cash: -100, revenuePct: 28, rdMoat: 25, marketSharePct: 3.5, marginPct: -2.0, boardPct: 10 },
+            debrief: "Acquiring Nexus AI positioned Aether as a premier AI platform provider, driving a massive surge in enterprise market valuation."
+          },
+          {
+            label: "Option B: Form Strategic Joint Venture & Intellectual Property License",
+            detail: "Invest $50M for a non-controlling 20% equity stake and exclusive technology license.",
+            cfoAdvice: "Controls financial risk and avoids balance sheet leverage.",
+            cooAdvice: "Slower operational integration than a full buyout.",
+            ctoAdvice: "Good access to technology, though Nexus could eventually license to rivals.",
+            cmoAdvice: "Solid PR narrative with lower capital commitment.",
+            impact: { cash: -50, revenuePct: 14, rdMoat: 12, marketSharePct: 1.5, marginPct: 0.5, boardPct: 4 },
+            debrief: "The joint venture provided steady technological gains without burdening the balance sheet with heavy debt."
+          },
+          {
+            label: "Option C: Pass on Nexus AI & Build Competitor In-House",
+            detail: "Decline the deal and assign 50 internal engineers to replicate the capability.",
+            cfoAdvice: "Preserves cash and avoids leverage.",
+            cooAdvice: "Takes 18–24 months minimum to develop equivalent tools.",
+            ctoAdvice: "Patent landscape is tricky; we risk infringement lawsuits.",
+            cmoAdvice: "Allows a rival firm to buy Nexus and gain a head start.",
+            impact: { cash: 0, revenuePct: 5, rdMoat: 3, marketSharePct: -1.0, boardPct: -5 },
+            debrief: "Passing on Nexus allowed a key competitor to buy them, eroding our technical edge in enterprise pitches."
+          }
+        ]
+      },
+      {
+        quarter: 7,
+        category: "GEOGRAPHIC & INTERNATIONAL EXPANSION",
+        title: "Penetrating High-Growth Asian & European Enterprise Markets",
+        description: "To reach $2B+ annual revenue, Aether must establish regional headquarters in Frankfurt and Singapore to service international enterprise accounts.",
+        options: [
+          {
+            label: "Option A: Full Regional Subsidiary Launch & Localized Data Sovereignty",
+            detail: "Invest $75M to build localized sales, legal compliance, and cloud hosting infrastructure.",
+            cfoAdvice: "High CapEx outlay, but complies fully with strict EU GDPR and Asian data laws.",
+            cooAdvice: "Establishes long-term operational foundations across foreign markets.",
+            ctoAdvice: "Ensures latency-free cloud access for international enterprise clients.",
+            cmoAdvice: "Unlocks massive new addressable revenue pools.",
+            impact: { cash: -75, revenuePct: 25, marketSharePct: 3.0, marginPct: -1.5, boardPct: 8, culture: 5 },
+            debrief: "International expansion unlocked major new revenue streams, making Aether a true multi-national enterprise player."
+          },
+          {
+            label: "Option B: Partner with Regional Distributors & Resellers",
+            detail: "Outsource international sales to localized third-party distribution networks.",
+            cfoAdvice: "Low upfront cost; revenue sharing limits top-line gross margin percentage.",
+            cooAdvice: "Fast market entry, but less direct control over customer service standards.",
+            ctoAdvice: "Requires building reseller API portals.",
+            cmoAdvice: "Accelerates brand presence in international markets.",
+            impact: { cash: -15, revenuePct: 12, marketSharePct: 1.5, marginPct: -0.5, boardPct: 3 },
+            debrief: "Distributors enabled quick entry into overseas markets, though lower channel margins capped profit upside."
+          },
+          {
+            label: "Option C: Delay International Expansion & Deepen Domestic Dominance",
+            detail: "Focus 100% of executive bandwidth on expanding North American market share.",
+            cfoAdvice: "Protects cash flow and avoids foreign currency exchange volatility.",
+            cooAdvice: "Simplifies management span of control.",
+            ctoAdvice: "Limits global server architecture complexity.",
+            cmoAdvice: "Surrenders international market share leadership to foreign competitors.",
+            impact: { cash: 25, revenuePct: 6, marketSharePct: -0.5, marginPct: 2.0, boardPct: -4 },
+            debrief: "Focusing solely on domestic markets boosted immediate net profits, but lowered our long-term addressable market size."
+          }
+        ]
+      },
+      {
+        quarter: 8,
+        category: "BOARD GOVERNANCE & CAPITAL RETURN",
+        title: "Share Buyback Program vs. Strategic Balance Sheet Fortification",
+        description: "Aether has reached $1.5B+ annual revenue with surging operating cash flow. Activist board members suggest returning capital to shareholders via buybacks.",
+        options: [
+          {
+            label: "Option A: Authorize $150M Share Repurchase Program",
+            detail: "Repurchase outstanding shares to boost Earnings Per Share (EPS) and stock price.",
+            cfoAdvice: "Increases EPS and market cap valuation directly by reducing share count.",
+            cooAdvice: "Does not contribute to operational scale or productivity.",
+            ctoAdvice: "Diverts capital away from next-gen technology research.",
+            cmoAdvice: "Signals maturity and strong financial health to Wall Street.",
+            impact: { cash: -150, marketCapDeltaPct: 12, boardPct: 10, marginPct: 0.5, rdMoat: -2 },
+            debrief: "The buyback program pleased institutional investors, boosting stock valuation and elevating board approval to record highs."
+          },
+          {
+            label: "Option B: Reinvest Cash into Next-Gen Infrastructure & Automated AI Factory",
+            detail: "Channel $150M into fully automated customer support and infrastructure AI.",
+            cfoAdvice: "Permanently reduces operating SG&A expense over the next 5 years.",
+            cooAdvice: "Reduces unit operating cost by 25%. Massive operational leverage.",
+            ctoAdvice: "Establishes an automated operational model rivals cannot match.",
+            cmoAdvice: "Enables sub-minute enterprise customer response times.",
+            impact: { cash: -150, marginPct: 5.0, rdMoat: 15, revenuePct: 10, culture: -4, boardPct: 6 },
+            debrief: "Automating operations dramatically expanded net profit margins to industry-leading levels, driving long-term enterprise value."
+          },
+          {
+            label: "Option C: Maintain Heavy Cash Reserve for Unforeseen Downturns",
+            detail: "Hold $300M+ in liquid treasury bills.",
+            cfoAdvice: "Impenetrable fortress balance sheet; zero default risk.",
+            cooAdvice: "Gives us firepower if a major crisis strikes.",
+            ctoAdvice: "Opportunity cost is high; capital lies dormant.",
+            cmoAdvice: "Wall Street may view us as lacking growth ambition.",
+            impact: { cash: 50, revenuePct: 2, marginPct: 1.0, boardPct: -5, rdMoat: -5 },
+            debrief: "Holding excessive cash protected the balance sheet, but draw criticism from growth-focused board members."
+          }
+        ]
+      },
+      {
+        quarter: 9,
+        category: "PRODUCT STRATEGY & ECOSYSTEM",
+        title: "Launching Proprietary Enterprise Developer Platform",
+        description: "To lock in enterprise clients like Apple and Microsoft do, Aether can open its proprietary API framework to third-party developers, creating a platform ecosystem.",
+        options: [
+          {
+            label: "Option A: Open Developer Ecosystem with 30% Marketplace Take-Rate",
+            detail: "Launch the Aether Developer Network, allowing developers to sell apps inside our platform.",
+            cfoAdvice: "Generates pure 100% margin software platform fee revenue.",
+            cooAdvice: "Requires developer support infrastructure and app vetting teams.",
+            ctoAdvice: "Creates exponential software utility and massive switching costs for clients.",
+            cmoAdvice: "Turns our core product into an indispensable enterprise ecosystem.",
+            impact: { cash: -30, revenuePct: 22, marginPct: 4.0, marketSharePct: 3.0, rdMoat: 15, boardPct: 8 },
+            debrief: "Launching the marketplace ecosystem transformed Aether into a platform power, unlocking high-margin developer commission streams."
+          },
+          {
+            label: "Option B: Closed Walled-Garden (First-Party Features Only)",
+            detail: "Keep all platform capabilities internal and proprietary.",
+            cfoAdvice: "Protects high direct product pricing without sharing revenue with developers.",
+            cooAdvice: "Ensures total control over software quality and security.",
+            ctoAdvice: "Limits ecosystem speed; internal teams cannot build every feature.",
+            cmoAdvice: "Slower feature rollouts compared to open ecosystems.",
+            impact: { cash: 10, revenuePct: 8, marginPct: 1.5, marketSharePct: 0, rdMoat: 5, boardPct: 2 },
+            debrief: "The closed strategy maintained high software standards, but allowed open platforms to capture faster developer ecosystem momentum."
+          },
+          {
+            label: "Option C: Open-Source Core Framework to Drive Global Adoption",
+            detail: "Release core platform architecture as open-source, monetizing only premium enterprise support.",
+            cfoAdvice: "Reduces software licensing revenue per client.",
+            cooAdvice: "Massive community-driven developer contributions reduce bug triage costs.",
+            ctoAdvice: "Drives massive developer adoption across global engineering teams.",
+            cmoAdvice: "Establishes Aether as the global industry standard overnight.",
+            impact: { cash: -20, revenuePct: -5, marketSharePct: 6.0, marginPct: -3.0, rdMoat: 20, culture: 12 },
+            debrief: "Open-sourcing surged global adoption and developer goodwill, though direct monetization dipped in the short term."
+          }
+        ]
+      },
+      {
+        quarter: 10,
+        category: "SUPPLY CHAIN & GEOPOLITICS",
+        title: "Geopolitical Tariff Wars & Trade Restrictions",
+        description: "Rising trade tariffs between major economic blocs threaten to add 25% import taxes on critical microchip servers and global infrastructure.",
+        options: [
+          {
+            label: "Option A: Diversify Supply Chain to Neutral Regional Hubs",
+            detail: "Re-route server manufacturing and assembly to India, Vietnam, and Latin America.",
+            cfoAdvice: "Costs $60M up front, but bypasses ongoing tariff costs permanently.",
+            cooAdvice: "Eliminates single-country supply chain vulnerability.",
+            ctoAdvice: "Requires quality control validation at new manufacturing sites.",
+            cmoAdvice: "Demonstrates operational maturity to enterprise shareholders.",
+            impact: { cash: -60, marginPct: 2.0, revenuePct: 10, marketSharePct: 1.0, boardPct: 6, culture: 2 },
+            debrief: "Supply chain diversification insulated Aether from trade shocks, protecting gross margins while competitors suffered supply delays."
+          },
+          {
+            label: "Option B: Absorb Tariff Costs Internal to Maintain Pricing",
+            detail: "Keep current supply chains unchanged and absorb the 25% tariff burden.",
+            cfoAdvice: "Directly reduces gross profit margins by ~400 basis points.",
+            cooAdvice: "Avoids supply chain disruption or factory relocation delays.",
+            ctoAdvice: "Keeps hardware specifications identical.",
+            cmoAdvice: "Protects customer relationship by avoiding price hikes.",
+            impact: { cash: -20, marginPct: -4.5, revenuePct: 5, boardPct: -4, marketSharePct: 0.5 },
+            debrief: "Absorbing tariffs protected customer contract pricing, but severely compressed quarterly net earnings."
+          },
+          {
+            label: "Option C: Pass 100% of Tariff Costs onto Enterprise Customers",
+            detail: "Increase platform contract prices across all international clients by 20%.",
+            cfoAdvice: "Protects net margins completely.",
+            cooAdvice: "No operational relocation required.",
+            ctoAdvice: "No technical change required.",
+            cmoAdvice: "Causes client outrage and increases churn to non-tariffed local competitors.",
+            impact: { cash: 30, marginPct: 1.0, revenuePct: -8, marketSharePct: -2.5, boardPct: -8 },
+            debrief: "Passing tariff costs onto customers preserved gross profit percentages, but drove price-sensitive clients toward domestic alternatives."
+          }
+        ]
+      },
+      {
+        quarter: 11,
+        category: "CULTURE & TALENT MANAGEMENT",
+        title: "Retaining Top Engineering Talent During Hyper-Growth",
+        description: "As Aether scales past $2.5B in revenue, big-tech competitors are poaching senior engineers with lucrative stock offers. Workplace burnout reports are rising.",
+        options: [
+          {
+            label: "Option A: Institute Flexible Work, Innovation Grants & Equity Vesting",
+            detail: "Offer 20% 'passion project' time, competitive retention equity grants, and flexible work policies.",
+            cfoAdvice: "Increases stock dilution slightly, but preserves organizational human capital.",
+            cooAdvice: "Improves retention rates among senior architects by 85%.",
+            ctoAdvice: "Spurs grass-roots product innovation and patent filings.",
+            cmoAdvice: "Enhances corporate employer brand rank.",
+            impact: { cash: -25, culture: 20, rdMoat: 12, marginPct: -0.5, boardPct: 4, revenuePct: 8 },
+            debrief: "Prioritizing engineering culture halted employee attrition, yielding proprietary innovation patents that boosted product moat."
+          },
+          {
+            label: "Option B: Match Rival Compensation Cash Salaries Exclusively",
+            detail: "Increase base cash salaries across all engineering teams by 20%.",
+            cfoAdvice: "Adds $40M in permanent ongoing fixed payroll overhead.",
+            cooAdvice: "Stops immediate poaching without altering work structures.",
+            ctoAdvice: "Fixes financial complaints but doesn't solve work burnout.",
+            cmoAdvice: "Neutral brand impact.",
+            impact: { cash: -40, culture: 8, marginPct: -2.0, boardPct: 1, revenuePct: 3 },
+            debrief: "Cash salary increases retained key talent, though fixed operating expenses permanently elevated break-even revenue levels."
+          },
+          {
+            label: "Option C: Enforce Strict Non-Compete Clauses & Rigorous Performance Reviews",
+            detail: "Mandate strict return-to-office policies and replace bottom 10% performers annually.",
+            cfoAdvice: "Saves money on equity grants and keeps payroll lean.",
+            cooAdvice: "High turnover creates operational friction in project handoffs.",
+            ctoAdvice: "Damages engineering trust; top talent leaves quietly.",
+            cmoAdvice: "Negative PR reviews on job review portals.",
+            impact: { cash: 15, culture: -18, rdMoat: -8, marginPct: 1.5, boardPct: -6, marketSharePct: -1.0 },
+            debrief: "Rigid policies cut short-term costs, but triggered a wave of senior talent departures that delayed key software releases."
+          }
+        ]
+      },
+      {
+        quarter: 12,
+        category: "CRISIS & REGULATORY COMPLIANCE",
+        title: "Antitrust Investigation by Global Market Regulators",
+        description: "With market share approaching dominant enterprise levels, antitrust regulators launch a formal inquiry into alleged anti-competitive bundling and platform lock-in.",
+        options: [
+          {
+            label: "Option A: Proactively Negotiate Consent Decree & Unbundle Software Tier",
+            detail: "Settle with regulators by unbundling add-ons and providing interoperability APIs.",
+            cfoAdvice: "Incurs $40M in legal and compliance restructuring costs.",
+            cooAdvice: "Requires updating product licensing terms globally.",
+            ctoAdvice: "Keeps engineering control intact while satisfying regulatory mandates.",
+            cmoAdvice: "Protects company from existential anti-monopoly lawsuits.",
+            impact: { cash: -40, boardPct: 5, marketSharePct: -0.5, marginPct: -1.0, revenuePct: 12 },
+            debrief: "Proactive regulatory settlement removed dark dark clouds over the stock, restoring institutional investor confidence."
+          },
+          {
+            label: "Option B: Fight Regulatory Inquiry in Federal Court",
+            detail: "Hire top litigation firms to contest antitrust charges vigorously.",
+            cfoAdvice: "High legal fees ($80M+) extending over multiple years.",
+            cooAdvice: "Distracts executive leadership from day-to-day operations.",
+            ctoAdvice: "Maintains existing bundled software architecture.",
+            cmoAdvice: "Puts brand in negative headline news continuously.",
+            impact: { cash: -80, boardPct: -10, marketSharePct: 1.0, marginPct: -2.5, revenuePct: 5 },
+            debrief: "The prolonged legal battle created stock price volatility and strained board trust as legal bills mounted."
+          },
+          {
+            label: "Option C: Spin Off Non-Core Business Segment into Independent Entity",
+            detail: "Spin off secondary software divisions to shareholders as a separate company.",
+            cfoAdvice: "Unlocks shareholder value via stock dividend spinoff; simplifies balance sheet.",
+            cooAdvice: "Focuses core team exclusively on high-margin primary enterprise products.",
+            ctoAdvice: "Streamlines codebases.",
+            cmoAdvice: "Creates two focused market leaders.",
+            impact: { cash: 50, revenuePct: -5, marginPct: 3.5, marketCapDeltaPct: 10, boardPct: 8 },
+            debrief: "The corporate spinoff unlocked shareholder value, streamlined operating focus, and successfully satisfied regulatory authorities."
+          }
+        ]
+      },
+      {
+        quarter: 13,
+        category: "CAPITAL ALLOCATION & M&A",
+        title: "Acquiring Legacy Enterprise Competitor 'Titan Systems'",
+        description: "Titan Systems ($1.2B revenue) is struggling with legacy tech debt. Acquiring them for $800M (Cash + Stock) would solidify market dominance.",
+        options: [
+          {
+            label: "Option A: Execute $800M Buyout of Titan Systems",
+            detail: "Consolidate customer bases and migrate Titan users onto Aether's modern platform.",
+            cfoAdvice: "Financed via cash reserves + stock issuance. Revenue jumps past $4B annually.",
+            cooAdvice: "Massive synergy potential: $150M annual cost savings by eliminating duplicate roles.",
+            ctoAdvice: "Migrating Titan's legacy codebase will take 18 months of heavy engineering effort.",
+            cmoAdvice: "Solidifies Aether as the undisputed global market share titan.",
+            impact: { cash: -120, revenuePct: 35, marketSharePct: 5.5, marginPct: -2.0, boardPct: 12, culture: -5 },
+            debrief: "The Titan acquisition vaulted annual revenues past $4 Billion, establishing market dominance despite heavy integration efforts."
+          },
+          {
+            label: "Option B: Launch Targeted Migration Campaign to Poach Titan Clients",
+            detail: "Offer aggressive 50% discount incentives for Titan clients to switch to Aether.",
+            cfoAdvice: "Zero M&A risk or debt obligations; cost funded via sales budget.",
+            cooAdvice: "No legacy technical debt or employee redundancy issues.",
+            ctoAdvice: "Clean technical onboarding onto native architecture.",
+            cmoAdvice: "Captures high-value client accounts organically over time.",
+            impact: { cash: -30, revenuePct: 18, marketSharePct: 2.5, marginPct: 2.0, boardPct: 6 },
+            debrief: "Organic client poaching steadily increased market share while expanding operating profit margins without acquisition debt."
+          },
+          {
+            label: "Option C: Decline Deal & Target Next-Gen Frontier Startup",
+            detail: "Pass on Titan and invest $100M in early-stage quantum computing software startups.",
+            cfoAdvice: "High-risk, long-term venture investment with zero immediate revenue.",
+            cooAdvice: "Minimal impact on current operational workflows.",
+            ctoAdvice: "Positions Aether for the next 10-year technological paradigm shift.",
+            cmoAdvice: "Strong innovation narrative.",
+            impact: { cash: -100, rdMoat: 20, revenuePct: 4, marginPct: -1.0, boardPct: 2 },
+            debrief: "Frontier investments fortified our 10-year technical moat, though top-line growth was slower than an M&A deal."
+          }
+        ]
+      },
+      {
+        quarter: 14,
+        category: "PRODUCT INNOVATION & AI REVOLUTION",
+        title: "Autonomous Enterprise AI Platform Deployment",
+        description: "Advancements in generative AI allow Aether to deploy autonomous AI agents capable of performing complex enterprise workflows with zero human intervention.",
+        options: [
+          {
+            label: "Option A: Full AI Integration Across Entire Product Suite",
+            detail: "Embed autonomous AI capabilities into every tier, raising prices by 35%.",
+            cfoAdvice: "Commands massive pricing power and gross margin expansion.",
+            cooAdvice: "Enterprise clients experience 10x productivity gains.",
+            ctoAdvice: "Establishes market lead over legacy competitors.",
+            cmoAdvice: "Generates global technology headlines and analyst upgrades.",
+            impact: { cash: -40, revenuePct: 30, marginPct: 5.0, rdMoat: 15, marketSharePct: 3.0, boardPct: 10 },
+            debrief: "The AI platform rollout triggered an explosive demand cycle, expanding gross margins past 75% and driving record revenue."
+          },
+          {
+            label: "Option B: Release AI as Premium Enterprise Add-On Module",
+            detail: "Keep base platform pricing unchanged; sell AI agents as a separate high-tier module.",
+            cfoAdvice: "High-margin incremental revenue stream without risking base contract renewals.",
+            cooAdvice: "Allows gradual server infrastructure scaling as adoption grows.",
+            ctoAdvice: "Safely tests model accuracy before universal deployment.",
+            cmoAdvice: "Strong upsell path for existing sales team.",
+            impact: { cash: -20, revenuePct: 18, marginPct: 3.0, rdMoat: 10, boardPct: 5 },
+            debrief: "The modular AI approach drove strong enterprise upsells while insulating the core platform from risk."
+          },
+          {
+            label: "Option C: Delay Launch for Multi-Quarter Governance & Safety Audits",
+            detail: "Conduct extensive AI safety and compliance testing before commercial release.",
+            cfoAdvice: "Delays monetization by 12 months.",
+            cooAdvice: "Ensures zero hallucination errors or liability claims.",
+            ctoAdvice: "Builds bulletproof safety architecture.",
+            cmoAdvice: "Competitors may capture early market mindshare.",
+            impact: { cash: -10, revenuePct: 5, marginPct: 0, boardPct: -4, rdMoat: 5 },
+            debrief: "Safety audits ensured rock-solid enterprise reliability, but allowed rivals to claim initial AI leadership headlines."
+          }
+        ]
+      },
+      {
+        quarter: 15,
+        category: "CAPITAL STRUCTURE & BALANCESHEET",
+        title: "Refinancing Debt & Massive Investment-Grade Bond Issuance",
+        description: "Interest rates are favorable. Aether can issue $500M in investment-grade corporate bonds to build a permanent war chest for global market leadership.",
+        options: [
+          {
+            label: "Option A: Issue $500M Corporate Bond War Chest",
+            detail: "Lock in low long-term fixed interest rates to fund future strategic acquisitions and global expansion.",
+            cfoAdvice: "Gives unprecedented liquidity ($600M+ cash reserve) while keeping interest expense manageable.",
+            cooAdvice: "Provides total capital freedom to execute global strategy.",
+            ctoAdvice: "Secures funding for massive long-term R&D projects.",
+            cmoAdvice: "Solidifies Aether's status as a top-tier global corporate titan.",
+            impact: { cash: 500, marginPct: -1.0, boardPct: 8, marketCapDeltaPct: 8 },
+            debrief: "Issuing investment-grade bonds created a multi-hundred million dollar liquidity war chest, boosting valuation and financial agility."
+          },
+          {
+            label: "Option B: Complete Debt Elimination Strategy",
+            detail: "Use current cash flows to pay off all outstanding debt completely.",
+            cfoAdvice: "Eliminates all interest expense, achieving pristine zero-debt status.",
+            cooAdvice: "Protects enterprise against macro economic recessions.",
+            ctoAdvice: "Limits capital available for speculative tech buildouts.",
+            cmoAdvice: "Highly praised by conservative balance-sheet analysts.",
+            impact: { cash: -100, marginPct: 2.5, boardPct: 5, rdMoat: -2 },
+            debrief: "Eliminating debt fortified the balance sheet, producing a pristine financial position with maximized net profit margins."
+          },
+          {
+            label: "Option C: Initiate Special Cash Dividend to Shareholders",
+            detail: "Distribute $200M cash directly to shareholders as a special one-off dividend.",
+            cfoAdvice: "Direct cash outflow without adding long-term earnings assets.",
+            cooAdvice: "No operational effect.",
+            ctoAdvice: "Capital leaves the company permanently.",
+            cmoAdvice: "Huge short-term stock price jump and investor satisfaction.",
+            impact: { cash: -200, boardPct: 12, marketCapDeltaPct: 10, rdMoat: -5 },
+            debrief: "The special dividend delighted institutional shareholders, driving market cap up and securing glowing board approval."
+          }
+        ]
+      },
+      {
+        quarter: 16,
+        category: "GLOBAL CROWN VICTORY & CAPSTONE STRATEGY",
+        title: "Establishing the 10-Year Global Monopoly Moat",
+        description: "Year 4 Capstone: Aether is on the verge of becoming a $10B+ mega-cap tech giant ($5B+ Revenue target). Define your legacy strategic posture.",
+        options: [
+          {
+            label: "Option A: The Ecosystem Dominance Strategy (Full Vertical & Horizontal Lock-In)",
+            detail: "Bind hardware, software, AI agents, developer marketplaces, and cloud hosting into an integrated ecosystem.",
+            cfoAdvice: "Maximizes Annual Recurring Revenue (ARR), profit margin, and gross margins.",
+            cooAdvice: "Creates impenetrable switching costs across all global accounts.",
+            ctoAdvice: "Establishes a 10-year technological moat competitors cannot breach.",
+            cmoAdvice: "Solidifies Aether as the defining enterprise titan of the decade.",
+            impact: { revenuePct: 25, marginPct: 4.0, marketSharePct: 4.0, rdMoat: 20, boardPct: 10 },
+            debrief: "Executing ecosystem dominance completed the transformation: Aether Dynamic Corp reached global mega-cap leadership!"
+          },
+          {
+            label: "Option B: The High-Margin Profit Engine Strategy",
+            detail: "Optimize pricing algorithms and streamline global cost structures for maximum net profit yields.",
+            cfoAdvice: "Pushes net profit margins past 35%+, generating massive free cash flow yields.",
+            cooAdvice: "Streamlined operational efficiency with minimal excess cost.",
+            ctoAdvice: "Focuses R&D strictly on high-ROI commercial features.",
+            cmoAdvice: "Produces envy-inducing Wall Street financial earnings reports.",
+            impact: { revenuePct: 15, marginPct: 8.0, boardPct: 12, cash: 150 },
+            debrief: "Optimizing profit yields transformed Aether into a cash-generation machine with stellar bottom-line earnings."
+          },
+          {
+            label: "Option C: The Continuous Innovation Strategy",
+            detail: "Reinvest 30% of total revenues directly back into radical frontier research labs.",
+            cfoAdvice: "Squeezes short-term margins, but guarantees technological dominance for decades.",
+            cooAdvice: "Pushes operational teams to continuously innovate.",
+            ctoAdvice: "Creates groundbreaking new product categories.",
+            cmoAdvice: "Inspires top-tier global talent and customer loyalty.",
+            impact: { revenuePct: 20, rdMoat: 30, culture: 25, marginPct: -2.0, boardPct: 6 },
+            debrief: "Unrelenting innovation turned Aether into an iconic technology powerhouse admired across the global business landscape."
+          }
+        ]
+      }
+    ];
+
+    /* ===================================================================
+       FINANCIAL STATEMENT TAB GENERATOR & RENDERER
+       =================================================================== */
+    function renderFinancialStatement() {
+      const container = document.getElementById('statement-content');
+      if (!container) return;
+
+      const qRev = (state.annualRevenue / 4).toFixed(1);
+      const annRev = state.annualRevenue.toFixed(1);
+      const cogs = (state.annualRevenue * 0.35 / 4).toFixed(1); // 35% COGS
+      const grossProfit = (qRev - cogs).toFixed(1);
+      const netProfit = (state.annualRevenue * (state.netMarginPct / 100) / 4).toFixed(1);
+      const opEx = (grossProfit - netProfit).toFixed(1);
+
+      if (state.activeFinancialTab === 'income') {
+        container.innerHTML = `
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Quarterly Revenue</span>
+            <span class="text-emerald-400 font-bold">$${qRev}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Cost of Goods Sold (COGS)</span>
+            <span class="text-red-400">-$${cogs}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-300 font-bold">
+            <span>Gross Profit</span>
+            <span class="text-white">$${grossProfit}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Operating Expense (SG&A, R&D)</span>
+            <span class="text-red-400">-$${opEx}M</span>
+          </div>
+          <div class="flex justify-between pt-1 text-slate-200 font-bold text-sm bg-slate-900/80 p-2 rounded border border-slate-800">
+            <span>Net Earnings (Qtr)</span>
+            <span class="text-brand-gold">$${netProfit}M (${state.netMarginPct.toFixed(1)}%)</span>
+          </div>
+        `;
+      } else if (state.activeFinancialTab === 'balance') {
+        const totalAssets = (state.cashReserves + state.marketCap * 0.4).toFixed(1);
+        const debt = (totalAssets * 0.25).toFixed(1);
+        const equity = (totalAssets - debt).toFixed(1);
+
+        container.innerHTML = `
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Cash & Equivalents</span>
+            <span class="text-emerald-400 font-bold">$${state.cashReserves.toFixed(1)}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Property, Plant & Tech Assets</span>
+            <span class="text-slate-300">$${(totalAssets - state.cashReserves).toFixed(1)}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-300 font-bold">
+            <span>Total Corporate Assets</span>
+            <span class="text-white">$${totalAssets}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Total Liabilities / Debt</span>
+            <span class="text-red-400">$${debt}M</span>
+          </div>
+          <div class="flex justify-between pt-1 text-slate-200 font-bold text-sm bg-slate-900/80 p-2 rounded border border-slate-800">
+            <span>Stockholder Equity</span>
+            <span class="text-brand-accentCyan">$${equity}M</span>
+          </div>
+        `;
+      } else if (state.activeFinancialTab === 'cash') {
+        const ocf = (netProfit * 1.25).toFixed(1);
+        const capex = (ocf * 0.4).toFixed(1);
+        const fcf = (ocf - capex).toFixed(1);
+
+        container.innerHTML = `
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Operating Cash Flow (OCF)</span>
+            <span class="text-emerald-400 font-bold">+$${ocf}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Capital Expenditure (CapEx)</span>
+            <span class="text-red-400">-$${capex}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-300 font-bold">
+            <span>Free Cash Flow (FCF)</span>
+            <span class="text-brand-gold">+$${fcf}M</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1 text-slate-400">
+            <span>Beginning Cash Balance</span>
+            <span class="text-slate-300">$${(state.cashReserves - parseFloat(fcf)).toFixed(1)}M</span>
+          </div>
+          <div class="flex justify-between pt-1 text-slate-200 font-bold text-sm bg-slate-900/80 p-2 rounded border border-slate-800">
+            <span>Ending Cash Reserve</span>
+            <span class="text-emerald-400">$${state.cashReserves.toFixed(1)}M</span>
+          </div>
+        `;
+      }
+    }
+
+    function switchFinancialTab(tabKey) {
+      playAudioTone(600, 'sine', 0.05);
+      state.activeFinancialTab = tabKey;
+
+      ['income', 'balance', 'cash'].forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        if (!btn) return;
+        if (t === tabKey) {
+          btn.className = "px-2 py-1 rounded bg-brand-cardBorder text-white font-semibold";
+        } else {
+          btn.className = "px-2 py-1 rounded text-slate-400 hover:text-white";
+        }
+      });
+
+      renderFinancialStatement();
+    }
+
+    /* ===================================================================
+       VALUATION MONITOR CANVAS CHART RENDERING ENGINE
+       =================================================================== */
+    function drawValuationChart() {
+      const canvas = document.getElementById('valuationChart');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const rect = canvas.getBoundingClientRect();
+      
+      // Handle High DPI displays
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const width = rect.width;
+      const height = rect.height;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw Grid Lines
+      ctx.strokeStyle = '#1F2C40';
+      ctx.lineWidth = 1;
+      const rows = 4;
+      for (let i = 1; i < rows; i++) {
+        const y = (height / rows) * i;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      const data = state.history;
+      if (data.length === 0) return;
+
+      // Calculate Min/Max Bounds
+      const maxCap = Math.max(...data.map(d => d.marketCap), 5000);
+      const minCap = 1000;
+
+      const maxRev = Math.max(...data.map(d => d.revenue), 1000);
+      const minRev = 200;
+
+      const padding = 20;
+      const chartWidth = width - padding * 2;
+      const chartHeight = height - padding * 2;
+
+      // Helper function for coordinate mapping
+      function getCapY(val) {
+        const pct = (val - minCap) / (maxCap - minCap);
+        return height - padding - (pct * chartHeight);
+      }
+
+      function getRevY(val) {
+        const pct = (val - minRev) / (maxRev - minRev);
+        return height - padding - (pct * chartHeight);
+      }
+
+      function getX(index) {
+        if (data.length === 1) return padding;
+        const step = chartWidth / (Math.max(data.length - 1, 15));
+        return padding + (index * step);
+      }
+
+      // Draw Market Cap Line (Gold)
+      ctx.beginPath();
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 3;
+      data.forEach((d, i) => {
+        const x = getX(i);
+        const y = getCapY(d.marketCap);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Draw Market Cap Area Gradient
+      if (data.length > 1) {
+        const grad = ctx.createLinearGradient(0, 0, 0, height);
+        grad.addColorStop(0, 'rgba(212, 175, 55, 0.25)');
+        grad.addColorStop(1, 'rgba(212, 175, 55, 0.0)');
+        
+        ctx.beginPath();
+        data.forEach((d, i) => {
+          const x = getX(i);
+          const y = getCapY(d.marketCap);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.lineTo(getX(data.length - 1), height - padding);
+        ctx.lineTo(getX(0), height - padding);
+        ctx.closePath();
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      // Draw Revenue Line (Cyan)
+      ctx.beginPath();
+      ctx.strokeStyle = '#00F2FE';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([4, 4]);
+      data.forEach((d, i) => {
+        const x = getX(i);
+        const y = getRevY(d.revenue);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Draw Data Points
+      data.forEach((d, i) => {
+        const x = getX(i);
+        const yCap = getCapY(d.marketCap);
+
+        ctx.beginPath();
+        ctx.arc(x, yCap, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#D4AF37';
+        ctx.fill();
+        ctx.strokeStyle = '#0B0F17';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
+    }
+
+    /* ===================================================================
+       UI UPDATE & DASHBOARD REFRESH ENGINE
+       =================================================================== */
+    function updateDashboardUI() {
+      // Top Bar & Quarter
+      document.getElementById('quarter-display').innerText = `Y${Math.ceil(state.quarter / 4)} Q${((state.quarter - 1) % 4) + 1} (Total Q${state.quarter})`;
+
+      // Market Cap
+      const capB = (state.marketCap / 1000).toFixed(2);
+      document.getElementById('kpi-marketcap').innerText = `$${capB}B`;
+      
+      const initialCap = initialState.marketCap;
+      const capGrowthPct = (((state.marketCap - initialCap) / initialCap) * 100).toFixed(1);
+      const capDeltaEl = document.getElementById('kpi-marketcap-delta');
+      if (capGrowthPct >= 0) {
+        capDeltaEl.className = "text-[11px] font-mono text-emerald-400 flex items-center gap-0.5";
+        capDeltaEl.innerHTML = `<i data-lucide="arrow-up-right" class="w-3 h-3"></i> +${capGrowthPct}% Total`;
+      } else {
+        capDeltaEl.className = "text-[11px] font-mono text-red-400 flex items-center gap-0.5";
+        capDeltaEl.innerHTML = `<i data-lucide="arrow-down-right" class="w-3 h-3"></i> ${capGrowthPct}% Total`;
+      }
+
+      // Revenue
+      document.getElementById('kpi-revenue').innerText = `$${state.annualRevenue.toFixed(1)}M`;
+      document.getElementById('kpi-revenue-delta').innerText = `$${(state.annualRevenue / 4).toFixed(1)}M / Qtr`;
+
+      // Net Margin
+      document.getElementById('kpi-margin').innerText = `${state.netMarginPct.toFixed(1)}%`;
+      const marginStatus = document.getElementById('kpi-margin-status');
+      if (state.netMarginPct >= 20) {
+        marginStatus.innerText = "Elite Margin";
+        marginStatus.className = "text-[11px] font-mono text-emerald-400 font-bold";
+      } else if (state.netMarginPct >= 12) {
+        marginStatus.innerText = "Healthy";
+        marginStatus.className = "text-[11px] font-mono text-emerald-400";
+      } else if (state.netMarginPct >= 5) {
+        marginStatus.innerText = "Compressed";
+        marginStatus.className = "text-[11px] font-mono text-amber-400";
+      } else {
+        marginStatus.innerText = "Critical Dip";
+        marginStatus.className = "text-[11px] font-mono text-red-400 font-bold";
+      }
+
+      // Cash Reserves
+      document.getElementById('kpi-cash').innerText = `$${state.cashReserves.toFixed(1)}M`;
+      const ocfEst = (state.annualRevenue * (state.netMarginPct / 100) / 4 * 1.2).toFixed(1);
+      document.getElementById('kpi-cashflow').innerText = `+ $${ocfEst}M OCF`;
+
+      // Market Share
+      document.getElementById('kpi-marketshare').innerText = `${state.marketSharePct.toFixed(1)}%`;
+      const shareStatus = document.getElementById('kpi-marketshare-status');
+      if (state.marketSharePct >= 25) shareStatus.innerText = "Global Titan";
+      else if (state.marketSharePct >= 15) shareStatus.innerText = "Large-Cap Leader";
+      else shareStatus.innerText = "Mid-Cap Tier";
+
+      // Board Rating
+      document.getElementById('kpi-board').innerText = `${Math.round(state.boardApprovalPct)}%`;
+      const boardStatus = document.getElementById('kpi-board-status');
+      if (state.boardApprovalPct < 35) {
+        boardStatus.innerText = "DANGER: Dismissal Risk";
+        boardStatus.className = "text-[11px] font-mono text-red-400 font-bold animate-pulse";
+      } else if (state.boardApprovalPct >= 70) {
+        boardStatus.innerText = "Strong Trust";
+        boardStatus.className = "text-[11px] font-mono text-emerald-400";
+      } else {
+        boardStatus.innerText = "Moderate";
+        boardStatus.className = "text-[11px] font-mono text-amber-400";
+      }
+
+      // Culture & R&D
+      document.getElementById('kpi-culture').innerText = `${Math.round(state.cultureScore)}/100`;
+      document.getElementById('kpi-rd').innerText = `${Math.round(state.rdMoatIndex)}/100`;
+
+      // Target Progress Bar ($25B Market Cap Target)
+      const targetCap = 25000; // $25B Target
+      const progressPct = Math.min(Math.max((state.marketCap / targetCap) * 100, 4), 100).toFixed(1);
+      document.getElementById('target-progress-pct').innerText = `${progressPct}% Scale Completed`;
+      document.getElementById('target-progress-bar').style.width = `${progressPct}%`;
+
+      // Financial Statement Tab Update
+      renderFinancialStatement();
+
+      // Redraw Chart
+      drawValuationChart();
+
+      // Re-initialize Lucide Icons
+      if (window.lucide) lucide.createIcons();
+    }
+
+    /* ===================================================================
+       DECISION ENGINE & SCENARIO DISPLAY LOGIC
+       =================================================================== */
+    function loadQuarterScenario() {
+      // Check Win / Loss Conditions First
+      if (state.boardApprovalPct < 30) {
+        triggerGameOver(false, "BOARD DISMISSAL", "The Board of Directors lost confidence in your leadership following consistent fiscal missteps or strategic friction. You were formally removed as CEO.");
+        return;
+      }
+
+      if (state.cashReserves < -50) {
+        triggerGameOver(false, "CORPORATE INSOLVENCY", "The company exhausted its liquidity reserves and failed to service corporate debt obligations. Aether Tech entered bankruptcy protection.");
+        return;
+      }
+
+      if (state.quarter > 16) {
+        const isMegaCap = state.marketCap >= 20000 && state.annualRevenue >= 4000;
+        if (isMegaCap) {
+          triggerGameOver(true, "LEGENDARY GROWTH OPERATOR", "Incredible performance! You successfully scaled Aether Dynamic Tech Corp from a mid-cap player into a global mega-cap titan, establishing a massive market share and sustainable profit engine.");
+        } else {
+          triggerGameOver(true, "STEADY CORPORATE OPERATOR", "You completed your 4-year tenure as CEO. While the enterprise grew stably, it fell just short of becoming an undisputed $25B+ mega-cap titan.");
+        }
+        return;
+      }
+
+      const scenario = decisionScenarios.find(s => s.quarter === state.quarter) || decisionScenarios[0];
+
+      // Update Header Text
+      document.getElementById('scenario-category').innerText = scenario.category;
+      document.getElementById('scenario-title').innerText = scenario.title;
+      document.getElementById('scenario-description').innerText = scenario.description;
+
+      // Populate Dynamic Option Cards
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+
+      scenario.options.forEach((opt, idx) => {
+        const card = document.createElement('div');
+        card.className = "bg-brand-cardBg border border-brand-cardBorder hover:border-brand-gold/60 p-4 rounded-xl transition cursor-pointer group hover:bg-slate-900/60 flex flex-col justify-between";
+        card.onclick = () => handleDecisionSelection(scenario, opt);
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-sm text-slate-100 group-hover:text-brand-gold transition flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-mono text-brand-gold">${String.fromCharCode(65 + idx)}</span>
+                ${opt.label}
+              </span>
+              <span class="text-[10px] font-mono px-2 py-0.5 bg-slate-800 text-slate-400 rounded group-hover:bg-brand-gold group-hover:text-black transition">SELECT EXECUTION</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pl-8">${opt.detail}</p>
+          </div>
+
+          <div class="mt-3 pl-8 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <span class="flex items-center gap-1 text-emerald-400">
+              <i data-lucide="zap" class="w-3 h-3"></i> Execute Strategic Option
+            </span>
+            <span class="text-slate-500 group-hover:text-slate-300">Quarter ${state.quarter} Decision</span>
+          </div>
+        `;
+        optionsContainer.appendChild(card);
+      });
+
+      // Update C-Suite Advisory Panel Text
+      if (scenario.options[0]) {
+        document.getElementById('advisor-cfo-advice').innerText = `"${scenario.options[0].cfoAdvice}"`;
+        document.getElementById('advisor-coo-advice').innerText = `"${scenario.options[0].cooAdvice}"`;
+        document.getElementById('advisor-cto-advice').innerText = `"${scenario.options[0].ctoAdvice}"`;
+        document.getElementById('advisor-cmo-advice').innerText = `"${scenario.options[0].cmoAdvice}"`;
+      }
+
+      updateDashboardUI();
+    }
+
+    /* ===================================================================
+       DECISION EXECUTION & CONSEQUENCE ENGINE
+       =================================================================== */
+    function handleDecisionSelection(scenario, option) {
+      playAudioTone(800, 'sine', 0.12);
+
+      const impact = option.impact;
+
+      // Apply Financial Updates
+      if (impact.cash) state.cashReserves += impact.cash;
+      if (impact.revenuePct) {
+        state.annualRevenue *= (1 + impact.revenuePct / 100);
+      }
+      if (impact.marginPct) {
+        state.netMarginPct = Math.min(Math.max(state.netMarginPct + impact.marginPct, 1.0), 45.0);
+      }
+      if (impact.marketSharePct) {
+        state.marketSharePct = Math.min(Math.max(state.marketSharePct + impact.marketSharePct, 1.0), 60.0);
+      }
+
+      // Apply Qualitative Index Updates
+      if (impact.boardPct) {
+        state.boardApprovalPct = Math.min(Math.max(state.boardApprovalPct + impact.boardPct, 0), 100);
+      }
+      if (impact.culture) {
+        state.cultureScore = Math.min(Math.max(state.cultureScore + impact.culture, 0), 100);
+      }
+      if (impact.rdMoat) {
+        state.rdMoatIndex = Math.min(Math.max(state.rdMoatIndex + impact.rdMoat, 0), 100);
+      }
+
+      // Calculate Market Cap Impact (Formula: Revenue * Margin Multiple + Market Share Bonus)
+      const profitMultiplier = Math.max(state.netMarginPct / 10, 1.0);
+      let calculatedCap = (state.annualRevenue * profitMultiplier * 3.5);
+      if (impact.marketCapDeltaPct) {
+        calculatedCap *= (1 + impact.marketCapDeltaPct / 100);
+      }
+      state.marketCap = Math.round(calculatedCap);
+
+      // Record History for Stock Chart
+      state.history.push({
+        quarter: `Y${Math.ceil(state.quarter / 4)} Q${((state.quarter - 1) % 4) + 1}`,
+        marketCap: state.marketCap,
+        revenue: Math.round(state.annualRevenue),
+        sharePrice: parseFloat((state.marketCap / 100).toFixed(2))
+      });
+
+      // Update Feedback Feed Panel
+      const feed = document.getElementById('decision-feedback-feed');
+      feed.innerHTML = `
+        <div class="p-3 bg-slate-900 border border-brand-gold/30 rounded-lg space-y-1.5 animate-fadeIn">
+          <div class="flex items-center justify-between font-mono text-[11px] text-brand-gold">
+            <span class="font-bold">EXECUTED: ${option.label.split(':')[0]}</span>
+            <span>Q${state.quarter} Debrief</span>
+          </div>
+          <p class="text-xs text-slate-200 leading-relaxed">${option.debrief}</p>
+          <div class="flex flex-wrap gap-2 text-[10px] font-mono pt-1 text-slate-400 border-t border-slate-800">
+            <span class="${impact.revenuePct >= 0 ? 'text-emerald-400' : 'text-red-400'}">
+              Revenue: ${impact.revenuePct >= 0 ? '+' : ''}${impact.revenuePct || 0}%
+            </span>
+            <span class="${impact.marginPct >= 0 ? 'text-emerald-400' : 'text-red-400'}">
+              Margin: ${impact.marginPct >= 0 ? '+' : ''}${impact.marginPct || 0}%
+            </span>
+            <span class="text-brand-gold">
+              Cap: $${(state.marketCap / 1000).toFixed(2)}B
+            </span>
+          </div>
+        </div>
+      `;
+
+      // Advance Quarter
+      state.quarter += 1;
+
+      // Load Next Quarter Scenario
+      loadQuarterScenario();
+    }
+
+    /* ===================================================================
+       GAME OVER & VICTORY MODAL LOGIC
+       =================================================================== */
+    function triggerGameOver(isWin, title, description) {
+      const modal = document.getElementById('game-over-modal');
+      const iconContainer = document.getElementById('modal-icon-container');
+      
+      document.getElementById('modal-subtitle').innerText = isWin ? "SIMULATION VICTORY" : "EXECUTIVE DISMISSAL";
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-description').innerText = description;
+
+      document.getElementById('final-cap').innerText = `$${(state.marketCap / 1000).toFixed(2)}B`;
+      document.getElementById('final-rev').innerText = `$${state.annualRevenue.toFixed(1)}M`;
+      document.getElementById('final-margin').innerText = `${state.netMarginPct.toFixed(1)}%`;
+      document.getElementById('final-board').innerText = `${Math.round(state.boardApprovalPct)}%`;
+
+      if (isWin) {
+        iconContainer.className = "w-16 h-16 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500 flex items-center justify-center text-emerald-400";
+        iconContainer.innerHTML = `<i data-lucide="trophy" class="w-8 h-8"></i>`;
+        playAudioTone(900, 'triangle', 0.3);
+      } else {
+        iconContainer.className = "w-16 h-16 mx-auto rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center text-red-400";
+        iconContainer.innerHTML = `<i data-lucide="alert-triangle" class="w-8 h-8"></i>`;
+        playAudioTone(200, 'sawtooth', 0.4);
+      }
+
+      modal.classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function restartSimulation() {
+      playAudioTone(500, 'sine', 0.1);
+      state = JSON.parse(JSON.stringify(initialState));
+      document.getElementById('game-over-modal').classList.add('hidden');
+      document.getElementById('decision-feedback-feed').innerHTML = `
+        <div class="p-3 bg-slate-900/60 rounded-lg border border-slate-800 text-slate-400 italic text-center text-xs">
+          Simulation reset. Welcome back to the Executive Suite, Chief.
+        </div>
+      `;
+      loadQuarterScenario();
+    }
+
+    /* ===================================================================
+       AUXILIARY CONTROLS & EVENT LISTENERS
+       =================================================================== */
+    function toggleLearningDrawer() {
+      playAudioTone(700, 'sine', 0.08);
+      const drawer = document.getElementById('learning-drawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    // Audio Sound Toggle Button
+    document.getElementById('sound-toggle-btn').addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('sound-icon');
+      const text = document.getElementById('sound-text');
+      if (soundEnabled) {
+        text.innerText = "AUDIO ON";
+        icon.setAttribute('data-lucide', 'volume-2');
+        playAudioTone(800, 'sine', 0.1);
+      } else {
+        text.innerText = "MUTED";
+        icon.setAttribute('data-lucide', 'volume-x');
+      }
+      if (window.lucide) lucide.createIcons();
+    });
+
+    // Reset Button
+    document.getElementById('restart-btn').addEventListener('click', () => {
+      if (confirm("Are you sure you want to restart the executive simulation?")) {
+        restartSimulation();
+      }
+    });
+
+    // Handle Window Resize for Canvas Chart
+    window.addEventListener('resize', () => {
+      drawValuationChart();
+    });
+
+    /* ===================================================================
+       INITIALIZATION ON WINDOW LOAD
+       =================================================================== */
+    window.onload = function() {
+      // Initialize Lucide Icons
+      if (window.lucide) lucide.createIcons();
+
+      // Load initial scenario and render charts
+      loadQuarterScenario();
+    };
+  </script>
+</body>
+</html>
